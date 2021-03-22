@@ -1,0 +1,42 @@
+name: PWA - Deploy to GitHub Pages
+
+# Run workflow on every push to the main branch
+on:
+  push:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy-to-github-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      # publishes Blazor project to the release-folder
+      - name: Build Project
+        run: dotnet publish CarWashPWA.csproj -c Release -o release --nologo
+    
+      # changes the base-tag in index.html from '/' to 'CarWashPWA' to match GitHub Pages repository subdirectory
+      - name: Change base-tag in index.html from / to CarWashPWA/
+        run: sed -i 's/<base href="\/" \/>/<base href="\/CarWashPWA\/" \/>/g' release/wwwroot/index.html
+    
+      # copy index.html to 404.html to serve the same file when a file is not found
+      - name: copy index.html to 404.html
+        run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+      # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+      - name: Add .nojekyll file
+        run: touch release/wwwroot/.nojekyll
+
+      - name: Commit wwwroot to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+          REPOSITORY-NAME: deividt/CarWashPWA
+          BRANCH: main
+          FOLDER: release/wwwroot
