@@ -1,17 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+// ----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Deividt Gemeli">
+// Copyright (c) Deividt Gemeli.
+// </copyright>
+// ----------------------------------------------------------------------
 
 namespace CarWashPWA
 {
+    using System;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+    using Microsoft.Extensions.DependencyInjection;
+
+    /// <summary>
+    /// Classe <see cref="Program" />
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Método Main
+        /// </summary>
+        /// <param name="args">Parâmetro args</param>
+        /// <returns>Retorna Task</returns>
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
