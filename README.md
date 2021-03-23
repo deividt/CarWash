@@ -8,6 +8,6 @@ Android App: https://install.appcenter.ms/users/deividt/apps/carwashapp.android/
 
 # Pre-Requisites
 
-Define user environment variables:
-- COGNITO_IDENTITY_POOL_ID = "<PUT_YOUR_IDENTITY_POOL_ID_HERE>"
-- SYNCFUSION_LICENSE = "<PUT_YOUR_SYNCFUSION_LICENSE_HERE>"
+* Define user environment variables:
+** COGNITO_IDENTITY_POOL_ID = "<PUT_YOUR_IDENTITY_POOL_ID_HERE>"
+** SYNCFUSION_LICENSE = "<PUT_YOUR_SYNCFUSION_LICENSE_HERE>"
